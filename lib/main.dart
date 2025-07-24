@@ -1,4 +1,4 @@
-import 'package:day_26_darsda/home_page.dart';
+import 'package:day_26_darsda/onboarding_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

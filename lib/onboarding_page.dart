@@ -1,4 +1,5 @@
-import 'package:day_26_darsda/onboarding_column.dart';
+import 'package:day_26_darsda/login_page.dart';
+import 'package:day_26_darsda/widgets/onboarding_column.dart';
 import 'package:day_26_darsda/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: Column(
-
           children: [
             SizedBox(
               height: (530 * MediaQuery.of(context).size.height) / 844,
@@ -81,38 +81,47 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-              SizedBox(height: 80,),
-              SizedBox(
-                  height: 30,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) => SizedBox(width: 8 ,),
-
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => Container(
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: currentIndex == index
-                            ? Color(0xFF454343)
-                            : Color(0xFF777777),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    itemCount: myList.length,
-                  ),
+            SizedBox(
+              height: 80,
+            ),
+            SizedBox(
+              height: 30,
+              child: ListView.separated(
+                shrinkWrap: true,
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 8,
                 ),
 
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: currentIndex == index
+                        ? Color(0xFF454343)
+                        : Color(0xFF777777),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                itemCount: myList.length,
+              ),
+            ),
 
             Spacer(),
             SizedBox(
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                  controller.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.linear,
-                  );
+                  currentIndex == myList.length - 1
+                      ? Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        )
+                      : controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.linear,
+                        );
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: Color(0xFFEAEAEA),
@@ -152,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Text(
                   currentIndex == 0 ? 'Skip' : 'Back',
-                  style: AppStyles.Button2,
+                  style: AppStyles.button2,
                 ),
               ),
             ),
